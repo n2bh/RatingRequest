@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Created by Magentix
+ * Date: 31/08/12
+ *
+ * @category   Magentix
+ * @package    Magentix_RatingRequest
+ * @author     Matthieu Vion (http://www.magentix.fr)
+ * @license    This work is free software, you can redistribute it and/or modify it
+ */
+-->
+<config>
+    <modules>
+        <Magentix_RatingRequest>
+            <version>0.1.2</version>
+        </Magentix_RatingRequest>
+    </modules>
+    <global>
+        <blocks>
+            <ratingrequest>
+                <class>Magentix_RatingRequest_Block</class>
+            </ratingrequest>
+        </blocks>
+        <models>
+            <ratingrequest>
+                <class>Magentix_RatingRequest_Model</class>
+            </ratingrequest>
+        </models>
+        <helpers>
+            <ratingrequest>
+                <class>Magentix_RatingRequest_Helper</class>
+            </ratingrequest>
+        </helpers>
+        <template>
+            <email>
+                <ratingrequest_email_email_template translate="label" module="ratingrequest">
+                    <label>Rating Request</label>
+                    <file>rating_request.html</file>
+                    <type>html</type>
+                </ratingrequest_email_email_template>
+            </email>
+        </template>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magentix_RatingRequest before="Mage_Adminhtml">Magentix_RatingRequest_Adminhtml</Magentix_RatingRequest>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Magentix_RatingRequest>
+                    <files>
+                        <default>Magentix_RatingRequest.csv</default>
+                    </files>
+                </Magentix_RatingRequest>
+            </modules>
+        </translate>
+        <events>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <add_rating_request_massaction>
+                        <class>ratingrequest/observer</class>
+                        <method>addMassAction</method>
+                    </add_rating_request_massaction>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+        </events>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <magentix_ratingrequest>
+                <schedule>
+                    <cron_expr>0 3 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>ratingrequest/observer::sendMail</model>
+                </run>
+            </magentix_ratingrequest>
+        </jobs>
+    </crontab>
+    <default>
+        <ratingrequest>
+            <send>
+                <enabled>1</enabled>
+                <days>15</days>
+            </send>
+            <email>
+                <sender_email_identity>custom2</sender_email_identity>
+                <copy_to></copy_to>
+                <email_template>ratingrequest_email_email_template</email_template>
+                <product_template><![CDATA[<li><b>{%name%}</b> : <a href="{%url%}">Review this product</a></li>]]></product_template>
+            </email>
+            <test>
+                <recipient_email>hello@example.com</recipient_email>
+            </test>
+        </ratingrequest>
+    </default>
+</config>

@@ -1,0 +1,45 @@
+<!--@subject Write Your Review @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"htmlescape var=$name":"Customer Name"}
+@-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Evaluate the product(s) you ordered</title>
+    </head>
+    <body style="background:#efefef">
+        <table width="600" border="0" cellspacing="0" cellpadding="1" align="center">
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="10" style="border:1px solid #ccc;font-family:Arial,Helvetica,sans-serif;font-size:12px;background:#ffffff">
+                        <tr>
+                            <td style="border-bottom:1px solid #ccc;font-size:14px">
+                                <b>{{var store.getFrontendName()}}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Dear {{htmlescape var=$name}},<br />
+                                <br />
+                                You place an order on our website a few days ago and we thank you !<br />
+                                <br />
+                                In order to offer you the best products, we would appreciate you taking
+                                few moments to evaluate the product(s) you ordered :<br />
+                                <br />
+                                <ul>
+                                    {{block type='ratingrequest/products' products=$products}}
+                                </ul>
+                                <br />
+                                Thank you for your participation and see you soon on our website !<br />
+                                <br />
+                                <a href="{{store url=''}}">{{var store.getFrontendName()}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

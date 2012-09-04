@@ -1,0 +1,45 @@
+<!--@subject Donnez votre avis sur vos produits @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"htmlescape var=$name":"Customer Name"}
+@-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Evaluer le(s) produit(s) que vous avez commandé(s)</title>
+    </head>
+    <body style="background:#efefef">
+        <table width="600" border="0" cellspacing="0" cellpadding="1" align="center">
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="10" style="border:1px solid #ccc;font-family:Arial,Helvetica,sans-serif;font-size:12px;background:#ffffff">
+                        <tr>
+                            <td style="border-bottom:1px solid #ccc;font-size:14px">
+                                <b>{{var store.getFrontendName()}}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Bonjour {{htmlescape var=$name}},<br />
+                                <br />
+                                Vous avez passez commande sur notre site il y a quelques jours et nous vous en remercions !<br />
+                                <br />
+                                Toujours soucieux de vous proposer les meilleurs produits, nous vous serions reconnaissants de prendre
+                                quelques instants pour évaluer le(s) produit(s) que vous avez commandé(s) :<br />
+                                <br />
+                                <ul>
+                                    {{block type='ratingrequest/products' products=$products}}
+                                </ul>
+                                <br />
+                                Merci pour votre participation et à très bientôt sur notre site !<br />
+                                <br />
+                                <a href="{{store url=''}}">{{var store.getFrontendName()}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
